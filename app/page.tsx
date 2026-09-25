@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import CatalogoPlantas from "@/components/CatalogoPlantas";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import {
   Card,
@@ -38,15 +39,19 @@ export default function Home() {
           perfecta según tu hogar, estilo de vida y experiencia.
         </p>
 
-        <div className="mt-8 flex gap-4">
+        <div className="mt-8 flex justify-center gap-4">
 
-          <Button size="lg">
-            Ver plantas
-          </Button>
+          <Link href="#plantas">
+            <Button>
+              Ver plantas
+            </Button>
+          </Link>
 
-          <Button size="lg" variant="outline">
-            ✨ Encontrar mi planta
-          </Button>
+          <Link href="/recomendador">
+            <Button variant="outline">
+              ✨ Encontrar mi planta
+            </Button>
+          </Link>
 
         </div>
 
