@@ -1,36 +1,180 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🌱 Plantify AI
 
-## Getting Started
+Plantify AI es una aplicación web de comercio electrónico de plantas desarrollada como proyecto demostrativo utilizando **React, Next.js, TypeScript, Tailwind CSS y shadcn/ui**.
 
-First, run the development server:
+El objetivo del proyecto es ofrecer una experiencia sencilla para descubrir plantas, consultar sus características, añadir productos al carrito y obtener una recomendación personalizada según las condiciones del hogar y el estilo de vida del usuario.
+
+## ✨ Funcionalidades
+
+- 🌿 Catálogo dinámico de plantas
+- 🔎 Buscador de productos
+- 🏷️ Filtros por categoría y dificultad
+- 📄 Página de detalle para cada planta
+- 🛒 Carrito de compra
+- ➕ Aumentar y disminuir cantidades
+- 🗑️ Eliminar productos del carrito
+- 💾 Persistencia del carrito mediante LocalStorage
+- 📱 Diseño responsive
+- ✨ Recomendador personalizado de plantas
+- 🔌 API interna mediante Next.js Route Handlers
+
+## 🤖 Recomendador Plantify
+
+Plantify incluye un sistema que recomienda una planta según información proporcionada por el usuario, como:
+
+- Cantidad de luz disponible
+- Experiencia cuidando plantas
+- Presencia de mascotas
+- Tamaño de planta preferido
+- Información adicional sobre su estilo de vida
+
+El frontend envía esta información mediante una petición `POST` al endpoint:
+
+```text
+/api/recomendar
+```
+
+La arquitectura del proyecto está preparada para utilizar **Vercel AI SDK** con un proveedor de modelos de IA.
+
+Para que la demo pueda funcionar sin depender de créditos o disponibilidad de un proveedor externo, actualmente dispone de un **modo de recomendación local basado en reglas**.
+
+De esta forma, la interfaz y la API permanecen desacopladas y el recomendador puede sustituirse por un modelo de IA sin modificar el flujo principal del frontend.
+
+## 🛠️ Tecnologías
+
+- React
+- Next.js
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Vercel AI SDK
+- Next.js App Router
+- React Context API
+- LocalStorage
+
+## 🏗️ Arquitectura
+
+```text
+Usuario
+   │
+   ▼
+React / Next.js
+   │
+   ├── Catálogo
+   ├── Buscador y filtros
+   ├── Detalle de productos
+   ├── Carrito
+   │
+   └── Recomendador
+            │
+            ▼
+      POST /api/recomendar
+            │
+            ▼
+      Next.js Route Handler
+            │
+            ├── Recomendador local
+            │
+            └── AI SDK (integración preparada)
+```
+
+## 🛒 Gestión del carrito
+
+El carrito utiliza **React Context API** para compartir su estado entre diferentes componentes y páginas.
+
+Los productos seleccionados se almacenan también en **LocalStorage**, permitiendo conservar el carrito incluso después de recargar la página.
+
+## 📂 Estructura principal
+
+```text
+app/
+├── api/
+│   └── recomendar/
+├── carrito/
+├── plantas/
+│   └── [id]/
+├── recomendador/
+├── layout.tsx
+└── page.tsx
+
+components/
+├── ui/
+├── CatalogoPlantas.tsx
+├── Navbar.tsx
+└── PlantaCard.tsx
+
+context/
+└── CarritoContext.tsx
+
+data/
+└── plantas.ts
+
+public/
+└── plantas/
+```
+
+## 🚀 Ejecutar el proyecto
+
+Clonar el repositorio:
+
+```bash
+git clone https://github.com/FerMorell/plantify-ai.git
+```
+
+Entrar en el proyecto:
+
+```bash
+cd plantify-ai
+```
+
+Instalar las dependencias:
+
+```bash
+npm install
+```
+
+Ejecutar el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abrir:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🔐 Variables de entorno
 
-## Learn More
+Las credenciales privadas nunca deben almacenarse directamente en el código ni subirse al repositorio.
 
-To learn more about Next.js, take a look at the following resources:
+Para utilizar un proveedor de IA se puede crear:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+.env.local
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Por ejemplo:
 
-## Deploy on Vercel
+```env
+OPENAI_API_KEY=tu_api_key
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`.env.local` está excluido del repositorio mediante `.gitignore`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🌐 Despliegue
+
+El proyecto está preparado para desplegarse mediante **Vercel**.
+
+La demo pública se añadirá aquí una vez realizado el despliegue.
+
+## 👩‍💻 Autora
+
+**Fernanda Morelli**
+
+GitHub: https://github.com/FerMorell
+
+---
+
+Proyecto desarrollado como demostración práctica de desarrollo frontend/full-stack con React, Next.js y herramientas modernas del ecosistema web.
